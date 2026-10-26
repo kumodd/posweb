@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Download Android APKs for Billing POS - POS Outlet, Business Admin, and Platform Admin.">
+  <title>Billing POS • App Downloads</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090D16;
+      --card-bg: rgba(17, 24, 39, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover-border: rgba(99, 102, 241, 0.35);
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --primary: #6366F1;
+      --emerald: #10B981;
+      --cyan: #06B6D4;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 20px 60px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Background Ambient Glows */
+    .ambient-glow {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(140px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.15;
+    }
+    .glow-1 {
+      top: -100px;
+      left: 15%;
+      background: radial-gradient(circle, var(--primary), transparent);
+    }
+    .glow-2 {
+      bottom: 50px;
+      right: 15%;
+      background: radial-gradient(circle, var(--emerald), transparent);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1040px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      color: #A5B4FC;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      margin-bottom: 18px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #34D399;
+      box-shadow: 0 0 10px #34D399;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    h1 {
+      font-size: clamp(32px, 5vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      background: linear-gradient(180deg, #FFFFFF 0%, #CBD5E1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* App Cards Grid */
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .app-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .app-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--card-hover-border);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+
+    .app-card.outlet:hover {
+      border-color: rgba(6, 182, 212, 0.4);
+      box-shadow: 0 20px 40px -15px rgba(6, 182, 212, 0.15);
+    }
+
+    .app-card.business:hover {
+      border-color: rgba(16, 185, 129, 0.4);
+      box-shadow: 0 20px 40px -15px rgba(16, 185, 129, 0.15);
+    }
+
+    .app-card.platform:hover {
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.15);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .app-logo {
+      width: 68px;
+      height: 68px;
+      border-radius: 18px;
+      object-fit: cover;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      flex-shrink: 0;
+    }
+
+    .app-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .app-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      letter-spacing: -0.01em;
+    }
+
+    .app-category {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .outlet .app-category { color: #38BDF8; }
+    .business .app-category { color: #34D399; }
+    .platform .app-category { color: #A5B4FC; }
+
+    .app-desc {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.55;
+      margin-bottom: 24px;
+      flex: 1;
+    }
+
+    .app-specs {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      margin-bottom: 24px;
+      font-size: 13px;
+    }
+
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .spec-label {
+      color: var(--text-dim);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .spec-val {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* Download Buttons */
+    .download-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      color: #FFFFFF;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .outlet .download-btn {
+      background: linear-gradient(135deg, #0284C7, #0369A1);
+    }
+    .outlet .download-btn:hover {
+      background: linear-gradient(135deg, #0369A1, #075985);
+      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
+    }
+
+    .business .download-btn {
+      background: linear-gradient(135deg, #059669, #047857);
+    }
+    .business .download-btn:hover {
+      background: linear-gradient(135deg, #047857, #065F46);
+      box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
+    }
+
+    .platform .download-btn {
+      background: linear-gradient(135deg, #6366F1, #4F46E5);
+    }
+    .platform .download-btn:hover {
+      background: linear-gradient(135deg, #4F46E5, #4338CA);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    .download-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.2s ease;
+    }
+
+    .download-btn:hover svg {
+      transform: translateY(2px);
+    }
+
+    /* Instruction Section */
+    .install-card {
+      background: rgba(17, 24, 39, 0.5);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 24px 28px;
+    }
+
+    .install-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .install-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      list-style: none;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Toast Notification */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1E293B;
+      color: #F8FAFC;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <div class="container">
+    <header>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Release Channel • Android APKs
+      </div>
+      <h1>Billing POS App Releases</h1>
+      <p class="subtitle">Directly download and install release builds for the Billing POS & Multi-Tenant Inventory platform.</p>
+    </header>
+
+    <div class="app-grid">
+      <!-- 1. POS Outlet -->
+      <article class="app-card outlet" id="card-pos-outlet">
+        <div class="card-top">
+          <img src="assets/outlet_logo.png" alt="POS Outlet Logo" class="app-logo">
+          <div class="app-meta">
+            <h2 class="app-title">POS Outlet</h2>
+            <span class="app-category">Cashier & Terminal</span>
+          </div>
+        </div>
+        <p class="app-desc">High-speed point-of-sale checkout terminal with barcode scanning, offline sync, cash drawer, and thermal Bluetooth receipt printing.</p>
+        <div class="app-specs">
+          <div class="spec-item">
+            <span class="spec-label">Version</span>
+            <span class="spec-val">v1.0.0</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">File Size</span>
+            <span class="spec-val">75 MB</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Target</span>
+            <span class="spec-val">Android 8+</span>
+          </div>
+        </div>
+        <a href="build_apks/POS_Outlet.apk" download="POS_Outlet.apk" class="download-btn" id="btn-download-outlet" onclick="triggerToast('Downloading POS Outlet APK...')">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Download APK
+        </a>
+      </article>
+
+      <!-- 2. Business Admin -->
+      <article class="app-card business" id="card-business-admin">
+        <div class="card-top">
+          <img src="assets/business_logo.png" alt="Business Admin Logo" class="app-logo">
+          <div class="app-meta">
+            <h2 class="app-title">Business Admin</h2>
+            <span class="app-category">Store Management</span>
+          </div>
+        </div>
+        <p class="app-desc">Store owner management console for multi-location outlets, product catalogs, staff roles, inventory transfers, and GST analytics.</p>
+        <div class="app-specs">
+          <div class="spec-item">
+            <span class="spec-label">Version</span>
+            <span class="spec-val">v1.0.0</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">File Size</span>
+            <span class="spec-val">70 MB</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Target</span>
+            <span class="spec-val">Android 8+</span>
+          </div>
+        </div>
+        <a href="build_apks/Business_Admin.apk" download="Business_Admin.apk" class="download-btn" id="btn-download-business" onclick="triggerToast('Downloading Business Admin APK...')">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Download APK
+        </a>
+      </article>
+
+      <!-- 3. Platform Admin -->
+      <article class="app-card platform" id="card-platform-admin">
+        <div class="card-top">
+          <img src="assets/platform_logo.png" alt="Platform Admin Logo" class="app-logo">
+          <div class="app-meta">
+            <h2 class="app-title">Platform Admin</h2>
+            <span class="app-category">Super Admin Console</span>
+          </div>
+        </div>
+        <p class="app-desc">Super admin mobile dashboard for multi-tenant SaaS oversight, subscription plans, platform system health, and revenue analytics.</p>
+        <div class="app-specs">
+          <div class="spec-item">
+            <span class="spec-label">Version</span>
+            <span class="spec-val">v1.0.0</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">File Size</span>
+            <span class="spec-val">68 MB</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Target</span>
+            <span class="spec-val">Android 8+</span>
+          </div>
+        </div>
+        <a href="build_apks/Platform_Admin.apk" download="Platform_Admin.apk" class="download-btn" id="btn-download-platform" onclick="triggerToast('Downloading Platform Admin APK...')">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Download APK
+        </a>
+      </article>
+    </div>
+
+    <!-- Installation Helper -->
+    <section class="install-card" aria-label="Installation Guide">
+      <div class="install-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A5B4FC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+        How to install on Android
+      </div>
+      <ol class="install-steps">
+        <li class="step-item">
+          <span class="step-num">1</span>
+          <span>Tap <strong>Download APK</strong> for your chosen application above.</span>
+        </li>
+        <li class="step-item">
+          <span class="step-num">2</span>
+          <span>Open the completed download from notifications or Files app.</span>
+        </li>
+        <li class="step-item">
+          <span class="step-num">3</span>
+          <span>If prompted, toggle <strong>Allow from this source</strong> in Settings.</span>
+        </li>
+        <li class="step-item">
+          <span class="step-num">4</span>
+          <span>Tap <strong>Install</strong> to complete setup and launch the app.</span>
+        </li>
+      </ol>
+    </section>
+
+    <footer>
+      Billing POS Ecosystem &copy; 2026 • Verified Release Channel
+    </footer>
+  </div>
+
+  <div id="toast">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+    <span id="toast-text">Starting download...</span>
+  </div>
+
+  <script>
+    function triggerToast(text) {
+      const toast = document.getElementById('toast');
+      const toastText = document.getElementById('toast-text');
+      toastText.textContent = text;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
